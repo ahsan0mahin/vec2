@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভেক্টরের বিভাজন ও সামান্তরিকের সূত্র</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h2>📐 ভেক্টর নোটস</h2>
+        <button class="close-btn" id="closeSidebar">✕</button>
+    </div>
+    <ul>
+        <li><a href="#hero" class="nav-link active">🏠 শুরু</a></li>
+        <li><a href="#real-life" class="nav-link">🌍 বাস্তব জীবনে ভেক্টর</a></li>
+        <li><a href="#parallelogram-law" class="nav-link">📐 সামান্তরিকের সূত্র</a></li>
+        <li><a href="#resultant-magnitude" class="nav-link">📏 লব্ধির মান নির্ণয়</a></li>
+        <li><a href="#resultant-direction" class="nav-link">🧭 লব্ধির দিক নির্ণয়</a></li>
+        <li><a href="#max-min" class="nav-link">📊 সর্বোচ্চ ও সর্বনিম্ন</a></li>
+        <li><a href="#vector-resolution" class="nav-link">✂️ ভেক্টরের বিভাজন</a></li>
+        <li><a href="#perpendicular" class="nav-link">⊥ লম্ব উপাংশ</a></li>
+        <li><a href="#any-direction" class="nav-link">↗️ যেকোনো দিকে উপাংশ</a></li>
+        <li><a href="#math-problems" class="nav-link">🧮 গণিত সমস্যা</a></li>
+        <li><a href="#quick-formulas" class="nav-link">📋 সূত্র সংকলন</a></li>
+    </ul>
+</nav>
+
+<button class="menu-btn" id="menuBtn">☰</button>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="section hero-section">
+        <div class="hero-bg-animation">
+            <canvas id="heroBgCanvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <h1>ভেক্টরের বিভাজন<br><span class="subtitle">ও সামান্তরিকের সূত্র</span></h1>
+            <p class="hero-desc">ভেক্টর কীভাবে যোগ হয়, ভাগ হয় — সব কিছু চোখের সামনে দেখো, হাত দিয়ে নাড়াও!</p>
+            <a href="#real-life" class="cta-btn">শুরু করো 🚀</a>
+        </div>
+    </section>
+
+    <!-- REAL LIFE SECTION -->
+    <section id="real-life" class="section">
+        <div class="container">
+            <h2 class="section-title">🌍 বাস্তব জীবনে ভেক্টর বিভাজন</h2>
+            
+            <div class="concept-card highlight-card">
+                <h3>💡 আগে বুঝে নাও — ভেক্টর বিভাজন কেন দরকার?</h3>
+                <p>তুমি যখন একটা বল ছুঁড়ে মারো, সেটা একই সাথে <strong>সামনে</strong> এবং <strong>উপরে</strong> যায়। মানে একটা ভেক্টর (বেগ) আসলে দুটো দিকে কাজ করছে। এই দুটো আলাদা দিকের ভেক্টরকে বের করাটাই হলো <strong>ভেক্টরের বিভাজন</strong>।</p>
+            </div>
+
+            <div class="examples-grid">
+                <div class="example-card" data-aos="fade-up">
+                    <div class="example-icon">⚽</div>
+                    <h4>বল ছোঁড়া</h4>
+                    <p>45° কোণে বল ছুঁড়লে বেগের একটা অংশ সামনে নিয়ে যায়, আরেকটা অংশ উপরে নিয়ে যায়।</p>
+                    <canvas id="ballThrowCanvas" width="300" height="200"></canvas>
+                    <button class="demo-btn" onclick="animateBallThrow()">▶ দেখো</button>
+                </div>
+                
+                <div class="example-card" data-aos="fade-up">
+                    <div class="example-icon">🛷</div>
+                    <h4>ঢালু পৃষ্ঠে বস্তু</h4>
+                    <p>ঢালে রাখা বস্তুর ওজন দুভাগে ভাগ হয় — একটা ঢাল বরাবর টানে, আরেকটা ঢালের উপর চাপ দেয়।</p>
+                    <canvas id="inclineCanvas" width="300" height="200"></canvas>
+                    <button class="demo-btn" onclick="animateIncline()">▶ দেখো</button>
+                </div>
+
+                <div class="example-card" data-aos="fade-up">
+                    <div class="example-icon">🚣</div>
+                    <h4>নদী পার হওয়া</h4>
+                    <p>নৌকা একদিকে যেতে চায়, স্রোত আরেকদিকে টানে। দুটো ভেক্টর মিলে নৌকা তির্যকভাবে যায়।</p>
+                    <canvas id="boatCanvas" width="300" height="200"></canvas>
+                    <button class="demo-btn" onclick="animateBoat()">▶ দেখো</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLELOGRAM LAW -->
+    <section id="parallelogram-law" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">📐 সামান্তরিকের সূত্র</h2>
+
+            <div class="two-column">
+                <div class="text-column">
+                    <div class="concept-card">
+                        <h3>📖 সূত্রটি কী বলে?</h3>
+                        <div class="law-box">
+                            <p>যদি একটি <strong>সামান্তরিকের</strong> কোনো কৌণিক বিন্দু থেকে অঙ্কিত <strong>দুটি সন্নিহিত বাহু</strong> দ্বারা একই জাতীয় দুটি ভেক্টরের মান ও দিক নির্দেশ করা যায়, তাহলে ঐ বিন্দু থেকে অঙ্কিত <strong>কর্ণটি</strong> তাদের <strong>লব্ধির</strong> মান ও দিক নির্দেশ করে।</p>
+                        </div>
+                    </div>
+
+                    <div class="step-by-step">
+                        <h3>🪜 ধাপে ধাপে বুঝি</h3>
+                        <div class="step">
+                            <span class="step-num">১</span>
+                            <p>O বিন্দু থেকে <strong>P⃗</strong> ভেক্টর OA বরাবর এবং <strong>Q⃗</strong> ভেক্টর OB বরাবর ক্রিয়া করছে</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">২</span>
+                            <p>P⃗ ও Q⃗ এর মধ্যবর্তী কোণ = <strong>α</strong></p>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">৩</span>
+                            <p>OA ও OB কে সন্নিহিত বাহু ধরে <strong>OACB সামান্তরিক</strong> আঁকো</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">৪</span>
+                            <p>O থেকে C পর্যন্ত কর্ণ <strong>OC = R⃗</strong> হলো লব্ধি!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-column">
+                    <div class="interactive-box">
+                        <h3>🎮 নিজে নাড়াও — Interactive Diagram</h3>
+                        <div class="controls-row">
+                            <label>P = <span id="pVal">5</span>
+                                <input type="range" id="pSlider" min="1" max="10" value="5" step="0.5">
+                            </label>
+                            <label>Q = <span id="qVal">4</span>
+                                <input type="range" id="qSlider" min="1" max="10" value="4" step="0.5">
+                            </label>
+                            <label>α = <span id="alphaVal">60</span>°
+                                <input type="range" id="alphaSlider" min="0" max="180" value="60">
+                            </label>
+                        </div>
+                        <canvas id="parallelogramCanvas" width="500" height="400"></canvas>
+                        <div class="result-display" id="parallelogramResult">
+                            <span>লব্ধি R = <strong id="rValue">—</strong></span>
+                            <span>দিক θ = <strong id="thetaValue">—</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOOK PUSH EXPERIMENT -->
+            <div class="concept-card experiment-card">
+                <h3>🧪 নিজে করো — বই ঠেলার পরীক্ষা</h3>
+                <p>টেবিলে বই রেখে ডান হাতে একদিকে ঠেলো → বই সেদিকে যায়।<br>
+                বাম হাতে অন্যদিকে ঠেলো → বই সেদিকে যায়।<br>
+                <strong>একই সাথে দুই হাতে দুই দিকে ঠেলো → বই মাঝামাঝি দিকে যায়!</strong></p>
+                <canvas id="bookPushCanvas" width="500" height="250"></canvas>
+                <div class="push-controls">
+                    <button class="demo-btn" onclick="pushRight()">👉 ডান হাতে ঠেলো</button>
+                    <button class="demo-btn" onclick="pushLeft()">👈 বাম হাতে ঠেলো</button>
+                    <button class="demo-btn primary" onclick="pushBoth()">🤲 দুই হাতে ঠেলো</button>
+                    <button class="demo-btn" onclick="resetBook()">🔄 Reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTANT MAGNITUDE -->
+    <section id="resultant-magnitude" class="section">
+        <div class="container">
+            <h2 class="section-title">📏 লব্ধির মান নির্ণয় — Proof</h2>
+            
+            <div class="proof-container">
+                <div class="proof-visual">
+                    <canvas id="proofCanvas" width="500" height="350"></canvas>
+                    <button class="demo-btn" id="proofStepBtn" onclick="nextProofStep()">পরের ধাপ ▶</button>
+                    <p class="step-info" id="proofStepInfo">ধাপ ১/৬ — "শুরু করতে বাটন চাপো"</p>
+                </div>
+
+                <div class="proof-steps">
+                    <h3>📝 প্রমাণ (Derivation)</h3>
+                    
+                    <div class="proof-step" id="ps1">
+                        <span class="ps-num">১</span>
+                        <div class="ps-content">
+                            <p>OACB সামান্তরিকে C থেকে OA-এর বর্ধিত অংশে <strong>CD লম্ব</strong> টানি।</p>
+                        </div>
+                    </div>
+
+                    <div class="proof-step" id="ps2">
+                        <span class="ps-num">২</span>
+                        <div class="ps-content">
+                            <p>△ODC সমকোণী ত্রিভুজে পিথাগোরাসের সূত্র:</p>
+                            <div class="formula">OC² = OD² + CD²</div>
+                            <div class="formula">OC² = (OA + AD)² + CD²</div>
+                        </div>
+                    </div>
+
+                    <div class="proof-step" id="ps3">
+                        <span class="ps-num">৩</span>
+                        <div class="ps-content">
+                            <p>△ACD সমকোণী ত্রিভুজে (∠CAD = α):</p>
+                            <div class="formula">CD = AC sin α = Q sin α</div>
+                            <div class="formula">AD = AC cos α = Q cos α</div>
+                        </div>
+                    </div>
+
+                    <div class="proof-step" id="ps4">
+                        <span class="ps-num">৪</span>
+                        <div class="ps-content">
+                            <p>মান বসাই:</p>
+                            <div class="formula">OC² = (P + Q cos α)² + (Q sin α)²</div>
+                        </div>
+                    </div>
+
+                    <div class="proof-step" id="ps5">
+                        <span class="ps-num">৫</span>
+                        <div class="ps-content">
+                            <p>বিস্তৃত করি:</p>
+                            <div class="formula">= P² + 2PQ cos α + Q²cos²α + Q²sin²α</div>
+                            <div class="formula">= P² + Q²(cos²α + sin²α) + 2PQ cos α</div>
+                        </div>
+                    </div>
+
+                    <div class="proof-step" id="ps6">
+                        <span class="ps-num">৬</span>
+                        <div class="ps-content">
+                            <p>যেহেতু cos²α + sin²α = 1:</p>
+                            <div class="formula final-formula">R = √(P² + Q² + 2PQ cos α)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTANT DIRECTION -->
+    <section id="resultant-direction" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">🧭 লব্ধির দিক নির্ণয়</h2>
+
+            <div class="two-column">
+                <div class="text-column">
+                    <div class="concept-card">
+                        <p>লব্ধি <strong>R⃗</strong> যদি <strong>P⃗</strong> এর সাথে <strong>θ</strong> কোণ তৈরি করে, তাহলে:</p>
+                        <div class="formula final-formula">
+                            tan θ = Q sin α / (P + Q cos α)
+                        </div>
+                        <div class="derivation-note">
+                            <p><strong>কীভাবে পেলাম?</strong></p>
+                            <p>△ODC ত্রিভুজে:</p>
+                            <p>tan θ = CD / OD = CD / (OA + AD)</p>
+                            <p>= Q sin α / (P + Q cos α)</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h4>🎯 মনে রাখার কৌশল</h4>
+                        <div class="memory-trick">
+                            <p><strong>R</strong> = "Root of P² + Q² + 2PQ cos α"</p>
+                            <p><strong>θ</strong> = "Q sin ÷ (P + Q cos)"</p>
+                            <p>মনে রাখো: <em>"কুসিন পিকিউ দুইবার"</em> (cos α, PQ, 2)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="visual-column">
+                    <canvas id="directionCanvas" width="450" height="350"></canvas>
+                    <div class="controls-row">
+                        <label>P = <span id="pVal2">6</span>
+                            <input type="range" id="pSlider2" min="1" max="10" value="6" step="0.5">
+                        </label>
+                        <label>Q = <span id="qVal2">4</span>
+                            <input type="range" id="qSlider2" min="1" max="10" value="4" step="0.5">
+                        </label>
+                        <label>α = <span id="alphaVal2">45</span>°
+                            <input type="range" id="alphaSlider2" min="1" max="179" value="45">
+                        </label>
+                    </div>
+                    <div class="result-display">
+                        <span>R = <strong id="rValue2">—</strong></span>
+                        <span>θ = <strong id="thetaValue2">—</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAX MIN SECTION -->
+    <section id="max-min" class="section">
+        <div class="container">
+            <h2 class="section-title">📊 লব্ধির সর্বোচ্চ ও সর্বনিম্ন মান</h2>
+
+            <div class="max-min-grid">
+                <div class="concept-card max-card">
+                    <h3>⬆️ সর্বোচ্চ মান (α = 0°)</h3>
+                    <p>দুটি ভেক্টর <strong>একই দিকে</strong> ক্রিয়া করলে:</p>
+                    <div class="formula final-formula green">R_max = P + Q</div>
+                    <canvas id="maxCanvas" width="400" height="150"></canvas>
+                    <button class="demo-btn" onclick="animateMax()">▶ দেখো</button>
+                    <div class="explanation">
+                        <p>cos 0° = 1 হওয়ায়:</p>
+                        <p>R² = P² + Q² + 2PQ(1) = (P+Q)²</p>
+                    </div>
+                </div>
+
+                <div class="concept-card min-card">
+                    <h3>⬇️ সর্বনিম্ন মান (α = 180°)</h3>
+                    <p>দুটি ভেক্টর <strong>বিপরীত দিকে</strong> ক্রিয়া করলে:</p>
+                    <div class="formula final-formula red">R_min = |P − Q|</div>
+                    <canvas id="minCanvas" width="400" height="150"></canvas>
+                    <button class="demo-btn" onclick="animateMin()">▶ দেখো</button>
+                    <div class="explanation">
+                        <p>cos 180° = −1 হওয়ায়:</p>
+                        <p>R² = P² + Q² − 2PQ = (P−Q)²</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE ANGLE EXPLORER -->
+            <div class="concept-card">
+                <h3>🎮 কোণ বদলে দেখো কীভাবে লব্ধি বদলায়</h3>
+                <div class="angle-explorer">
+                    <canvas id="angleExplorerCanvas" width="600" height="300"></canvas>
+                    <div class="controls-row center">
+                        <label>α = <span id="explorerAlpha">0</span>°
+                            <input type="range" id="explorerSlider" min="0" max="180" value="0">
+                        </label>
+                    </div>
+                    <div class="result-display" id="explorerResult">
+                        <span>P = 5, Q = 3</span>
+                        <span>R = <strong id="explorerR">8</strong></span>
+                        <span class="result-tag" id="explorerTag">সর্বোচ্চ!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VECTOR RESOLUTION -->
+    <section id="vector-resolution" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">✂️ ভেক্টরের বিভাজন (Resolution)</h2>
+            
+            <div class="concept-card highlight-card">
+                <h3>🔑 মূল ধারণা</h3>
+                <p>আমরা দেখেছি একাধিক ভেক্টর যোগ করে একটি ভেক্টর পাওয়া যায়। ঠিক তার <strong>উল্টো</strong> — একটি ভেক্টরকেও দুই বা ততোধিক ভেক্টরে ভাগ করা যায়।</p>
+                <div class="analogy-box">
+                    <p>🍕 <strong>উদাহরণ:</strong> পুরো পিজ্জা = টুকরো ১ + টুকরো ২ + ... ঠিক তেমনি, R⃗ = X⃗ + Y⃗</p>
+                </div>
+            </div>
+
+            <div class="resolution-visual">
+                <canvas id="resolutionIntroCanvas" width="500" height="300"></canvas>
+                <button class="demo-btn" onclick="animateResolution()">▶ বিভাজন দেখো</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERPENDICULAR COMPONENTS -->
+    <section id="perpendicular" class="section">
+        <div class="container">
+            <h2 class="section-title">⊥ লম্ব উপাংশ (Perpendicular Components)</h2>
+
+            <div class="two-column">
+                <div class="text-column">
+                    <div class="concept-card">
+                        <h3>📖 লম্ব উপাংশ কী?</h3>
+                        <p>যখন একটি ভেক্টরকে এমনভাবে দুটি উপাংশে ভাগ করা হয় যে উপাংশ দুটি পরস্পর <strong>90° কোণে</strong> থাকে, তখন তাদের <strong>লম্ব উপাংশ</strong> বলে।</p>
+                    </div>
+
+                    <div class="step-by-step">
+                        <div class="step">
+                            <span class="step-num">১</span>
+                            <p>R⃗ ভেক্টরকে α কোণে X-অক্ষের সাথে রাখো</p>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">২</span>
+                            <p>X-অক্ষ বরাবর উপাংশ: <strong class="formula-inline">X = R cos α</strong></p>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">৩</span>
+                            <p>Y-অক্ষ বরাবর উপাংশ: <strong class="formula-inline">Y = R sin α</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card memory-card">
+                        <h4>🧠 মনে রাখার কৌশল</h4>
+                        <p><strong>"কোণের কাছে cos, কোণের দূরে sin"</strong></p>
+                        <p>যেদিকে কোণটি মাপা হচ্ছে সেদিকের উপাংশে cos বসে, আর তার লম্ব দিকে sin বসে।</p>
+                    </div>
+
+                    <div class="formula-box">
+                        <div class="formula final-formula">X = R cos α</div>
+                        <div class="formula final-formula">Y = R sin α</div>
+                    </div>
+                </div>
+
+                <div class="visual-column">
+                    <div class="interactive-box">
+                        <h3>🎮 নিজে ঘুরাও</h3>
+                        <canvas id="perpCanvas" width="450" height="400"></canvas>
+                        <div class="controls-row">
+                            <label>R = <span id="rCompVal">8</span>
+                                <input type="range" id="rCompSlider" min="2" max="12" value="8" step="0.5">
+                            </label>
+                            <label>α = <span id="alphaCompVal">30</span>°
+                                <input type="range" id="alphaCompSlider" min="0" max="90" value="30">
+                            </label>
+                        </div>
+                        <div class="result-display">
+                            <span>X = R cos α = <strong id="xCompValue">—</strong></span>
+                            <span>Y = R sin α = <strong id="yCompValue">—</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT TRIANGLE VISUALIZATION -->
+            <div class="concept-card">
+                <h3>📐 ত্রিকোণমিতি থেকে কীভাবে পেলাম?</h3>
+                <canvas id="trigoCanvas" width="500" height="300"></canvas>
+                <div class="trigo-explanation">
+                    <div class="trigo-step">
+                        <p>OAC সমকোণী ত্রিভুজে:</p>
+                    </div>
+                    <div class="trigo-step">
+                        <p>cos α = সংলগ্ন / অতিভুজ = OA / OC = X / R</p>
+                        <p>∴ <strong>X = R cos α</strong></p>
+                    </div>
+                    <div class="trigo-step">
+                        <p>sin α = বিপরীত / অতিভুজ = AC / OC = Y / R</p>
+                        <p>∴ <strong>Y = R sin α</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANY DIRECTION COMPONENTS -->
+    <section id="any-direction" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">↗️ যেকোনো দুই দিকে উপাংশ</h2>
+
+            <div class="two-column">
+                <div class="text-column">
+                    <div class="concept-card">
+                        <h3>📖 উপাংশ দুটি লম্ব না হলে?</h3>
+                        <p>R⃗ এর সাথে <strong>α</strong> কোণে উপাংশ X⃗ এবং <strong>β</strong> কোণে উপাংশ Y⃗ হলে:</p>
+                        <div class="formula final-formula">X = R sin β / sin(α + β)</div>
+                        <div class="formula final-formula">Y = R sin α / sin(α + β)</div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h4>✅ চেক করো</h4>
+                        <p>যখন α + β = 90° অর্থাৎ উপাংশ দুটি লম্ব:</p>
+                        <p>sin(α + β) = sin 90° = 1</p>
+                        <p>X = R sin β = R sin(90° − α) = R cos α ✓</p>
+                        <p>Y = R sin α ✓</p>
+                    </div>
+                </div>
+
+                <div class="visual-column">
+                    <div class="interactive-box">
+                        <h3>🎮 কোণ বদলাও</h3>
+                        <canvas id="anyDirCanvas" width="450" height="350"></canvas>
+                        <div class="controls-row">
+                            <label>R = <span id="rAnyVal">8</span>
+                                <input type="range" id="rAnySlider" min="2" max="12" value="8" step="0.5">
+                            </label>
+                            <label>α = <span id="alphaAnyVal">30</span>°
+                                <input type="range" id="alphaAnySlider" min="5" max="85" value="30">
+                            </label>
+                            <label>β = <span id="betaAnyVal">45</span>°
+                                <input type="range" id="betaAnySlider" min="5" max="85" value="45">
+                            </label>
+                        </div>
+                        <div class="result-display">
+                            <span>X = <strong id="xAnyValue">—</strong></span>
+                            <span>Y = <strong id="yAnyValue">—</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATH PROBLEMS -->
+    <section id="math-problems" class="section">
+        <div class="container">
+            <h2 class="section-title">🧮 গণিত সমস্যা ও সমাধান</h2>
+
+            <!-- Problem 1 -->
+            <div class="problem-card" id="prob1">
+                <div class="problem-header">
+                    <span class="problem-num">সমস্যা ১</span>
+                    <span class="problem-type">সামান্তরিকের সূত্র</span>
+                </div>
+                <div class="problem-body">
+                    <p class="problem-text">দুটি বল P = 5N ও Q = 8N একটি বিন্দুতে 60° কোণে ক্রিয়া করে। তাদের লব্ধির মান ও দিক নির্ণয় করো।</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('sol1')">সমাধান দেখো ▼</button>
+                    
+                    <div class="solution" id="sol1">
+                        <div class="sol-step">
+                            <span class="sol-label">দেওয়া আছে:</span>
+                            <p>P = 5N, Q = 8N, α = 60°</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">সূত্র:</span>
+                            <div class="formula">R = √(P² + Q² + 2PQ cos α)</div>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">মান বসাই:</span>
+                            <div class="formula">R = √(5² + 8² + 2 × 5 × 8 × cos 60°)</div>
+                            <div class="formula">= √(25 + 64 + 80 × 0.5)</div>
+                            <div class="formula">= √(25 + 64 + 40)</div>
+                            <div class="formula">= √129</div>
+                            <div class="formula final-formula">R ≈ 11.36 N</div>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">দিক:</span>
+                            <div class="formula">tan θ = Q sin α / (P + Q cos α)</div>
+                            <div class="formula">= 8 × sin 60° / (5 + 8 × cos 60°)</div>
+                            <div class="formula">= 8 × 0.866 / (5 + 4)</div>
+                            <div class="formula">= 6.928 / 9 = 0.7698</div>
+                            <div class="formula final-formula">θ = tan⁻¹(0.7698) ≈ 37.59°</div>
+                        </div>
+                        <canvas id="prob1Canvas" width="400" height="300"></canvas>
+                        <button class="demo-btn" onclick="drawProblem1()">▶ চিত্র দেখো</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem 2 -->
+            <div class="problem-card" id="prob2">
+                <div class="problem-header">
+                    <span class="problem-num">সমস্যা ২</span>
+                    <span class="problem-type">লম্ব উপাংশ</span>
+                </div>
+                <div class="problem-body">
+                    <p class="problem-text">10 N বল 30° কোণে অনুভূমিকের সাথে ক্রিয়া করে। এর অনুভূমিক ও উল্লম্ব উপাংশ নির্ণয় করো।</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('sol2')">সমাধান দেখো ▼</button>
+                    
+                    <div class="solution" id="sol2">
+                        <div class="sol-step">
+                            <span class="sol-label">দেওয়া আছে:</span>
+                            <p>R = 10N, α = 30°</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">অনুভূমিক উপাংশ:</span>
+                            <div class="formula">X = R cos α = 10 × cos 30°</div>
+                            <div class="formula">= 10 × 0.866</div>
+                            <div class="formula final-formula">X = 8.66 N</div>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">উল্লম্ব উপাংশ:</span>
+                            <div class="formula">Y = R sin α = 10 × sin 30°</div>
+                            <div class="formula">= 10 × 0.5</div>
+                            <div class="formula final-formula">Y = 5 N</div>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">যাচাই:</span>
+                            <div class="formula">√(X² + Y²) = √(8.66² + 5²) = √(75 + 25) = √100 = 10 N ✓</div>
+                        </div>
+                        <canvas id="prob2Canvas" width="400" height="300"></canvas>
+                        <button class="demo-btn" onclick="drawProblem2()">▶ চিত্র দেখো</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem 3 -->
+            <div class="problem-card" id="prob3">
+                <div class="problem-header">
+                    <span class="problem-num">সমস্যা ৩</span>
+                    <span class="problem-type">সর্বোচ্চ ও সর্বনিম্ন</span>
+                </div>
+                <div class="problem-body">
+                    <p class="problem-text">দুটি বলের মান 12N ও 5N। তাদের লব্ধির সর্বোচ্চ ও সর্বনিম্ন মান নির্ণয় করো। লব্ধি কখনো 20N বা 3N হতে পারবে কি?</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('sol3')">সমাধান দেখো ▼</button>
+                    
+                    <div class="solution" id="sol3">
+                        <div class="sol-step">
+                            <span class="sol-label">দেওয়া আছে:</span>
+                            <p>P = 12N, Q = 5N</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">সর্বোচ্চ মান:</span>
+                            <div class="formula">R_max = P + Q = 12 + 5</div>
+                            <div class="formula final-formula green">R_max = 17 N</div>
+                            <p>(যখন α = 0°, একই দিকে)</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">সর্বনিম্ন মান:</span>
+                            <div class="formula">R_min = |P − Q| = |12 − 5|</div>
+                            <div class="formula final-formula red">R_min = 7 N</div>
+                            <p>(যখন α = 180°, বিপরীত দিকে)</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">বিশ্লেষণ:</span>
+                            <p>লব্ধির সম্ভাব্য পরিসর: <strong>7N ≤ R ≤ 17N</strong></p>
+                            <p>❌ R = 20N → 17N-এর বেশি, তাই <strong>সম্ভব নয়</strong></p>
+                            <p>❌ R = 3N → 7N-এর কম, তাই <strong>সম্ভব নয়</strong></p>
+                        </div>
+                        <canvas id="prob3Canvas" width="500" height="200"></canvas>
+                        <button class="demo-btn" onclick="drawProblem3()">▶ চিত্র দেখো</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem 4 -->
+            <div class="problem-card" id="prob4">
+                <div class="problem-header">
+                    <span class="problem-num">সমস্যা ৪</span>
+                    <span class="problem-type">লব্ধি ও উপাংশ সম্পর্কিত</span>
+                </div>
+                <div class="problem-body">
+                    <p class="problem-text">দুটি সমান বল পরস্পর 120° কোণে ক্রিয়া করলে তাদের লব্ধি 10N হয়। প্রতিটি বলের মান নির্ণয় করো।</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('sol4')">সমাধান দেখো ▼</button>
+                    
+                    <div class="solution" id="sol4">
+                        <div class="sol-step">
+                            <span class="sol-label">দেওয়া আছে:</span>
+                            <p>P = Q = F (ধরি), α = 120°, R = 10N</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">সূত্র প্রয়োগ:</span>
+                            <div class="formula">R² = P² + Q² + 2PQ cos α</div>
+                            <div class="formula">10² = F² + F² + 2F·F cos 120°</div>
+                            <div class="formula">100 = 2F² + 2F²(−½)</div>
+                            <div class="formula">100 = 2F² − F²</div>
+                            <div class="formula">100 = F²</div>
+                            <div class="formula final-formula">F = 10 N</div>
+                        </div>
+                        <canvas id="prob4Canvas" width="400" height="300"></canvas>
+                        <button class="demo-btn" onclick="drawProblem4()">▶ চিত্র দেখো</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem 5 -->
+            <div class="problem-card" id="prob5">
+                <div class="problem-header">
+                    <span class="problem-num">সমস্যা ৫</span>
+                    <span class="problem-type">যেকোনো দিকে উপাংশ</span>
+                </div>
+                <div class="problem-body">
+                    <p class="problem-text">20N বলকে এমনভাবে দুটি উপাংশে বিভক্ত করো যেন একটি উপাংশ বলের সাথে 30° কোণে এবং অপরটি 45° কোণে থাকে।</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('sol5')">সমাধান দেখো ▼</button>
+                    
+                    <div class="solution" id="sol5">
+                        <div class="sol-step">
+                            <span class="sol-label">দেওয়া আছে:</span>
+                            <p>R = 20N, α = 30°, β = 45°</p>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">সূত্র:</span>
+                            <div class="formula">X = R sin β / sin(α + β)</div>
+                            <div class="formula">Y = R sin α / sin(α + β)</div>
+                        </div>
+                        <div class="sol-step">
+                            <span class="sol-label">মান বসাই:</span>
+                            <div class="formula">sin(30° + 45°) = sin 75° = 0.9659</div>
+                            <div class="formula">X = 20 × sin 45° / sin 75°</div>
+                            <div class="formula">= 20 × 0.7071 / 0.9659</div>
+                            <div class="formula final-formula">X ≈ 14.64 N</div>
+                            <div class="formula">Y = 20 × sin 30° / sin 75°</div>
+                            <div class="formula">= 20 × 0.5 / 0.9659</div>
+                            <div class="formula final-formula">Y ≈ 10.35 N</div>
+                        </div>
+                        <canvas id="prob5Canvas" width="400" height="300"></canvas>
+                        <button class="demo-btn" onclick="drawProblem5()">▶ চিত্র দেখো</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK FORMULAS -->
+    <section id="quick-formulas" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">📋 সূত্র সংকলন (Quick Reference)</h2>
+            
+            <div class="formula-grid">
+                <div class="formula-card">
+                    <h4>সামান্তরিকের সূত্র — লব্ধির মান</h4>
+                    <div class="formula final-formula">R = √(P² + Q² + 2PQ cos α)</div>
+                </div>
+                <div class="formula-card">
+                    <h4>লব্ধির দিক</h4>
+                    <div class="formula final-formula">tan θ = Q sin α / (P + Q cos α)</div>
+                </div>
+                <div class="formula-card">
+                    <h4>লম্ব উপাংশ</h4>
+                    <div class="formula final-formula">X = R cos α</div>
+                    <div class="formula final-formula">Y = R sin α</div>
+                </div>
+                <div class="formula-card">
+                    <h4>যেকোনো দিকে উপাংশ</h4>
+                    <div class="formula final-formula">X = R sin β / sin(α+β)</div>
+                    <div class="formula final-formula">Y = R sin α / sin(α+β)</div>
+                </div>
+                <div class="formula-card">
+                    <h4>সর্বোচ্চ লব্ধি (α = 0°)</h4>
+                    <div class="formula final-formula green">R_max = P + Q</div>
+                </div>
+                <div class="formula-card">
+                    <h4>সর্বনিম্ন লব্ধি (α = 180°)</h4>
+                    <div class="formula final-formula red">R_min = |P − Q|</div>
+                </div>
+            </div>
+
+            <!-- SPECIAL CASES TABLE -->
+            <div class="concept-card">
+                <h3>📊 বিশেষ ক্ষেত্র</h3>
+                <div class="table-wrapper">
+                    <table class="special-table">
+                        <thead>
+                            <tr>
+                                <th>কোণ (α)</th>
+                                <th>cos α</th>
+                                <th>লব্ধি R</th>
+                                <th>ব্যাখ্যা</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0°</td>
+                                <td>1</td>
+                                <td>P + Q</td>
+                                <td>একই দিকে → সর্বোচ্চ</td>
+                            </tr>
+                            <tr>
+                                <td>60°</td>
+                                <td>0.5</td>
+                                <td>√(P²+Q²+PQ)</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>90°</td>
+                                <td>0</td>
+                                <td>√(P²+Q²)</td>
+                                <td>লম্বভাবে → পিথাগোরাস!</td>
+                            </tr>
+                            <tr>
+                                <td>120°</td>
+                                <td>−0.5</td>
+                                <td>√(P²+Q²−PQ)</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td>180°</td>
+                                <td>−1</td>
+                                <td>|P − Q|</td>
+                                <td>বিপরীত দিকে → সর্বনিম্ন</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>📚 HSC পদার্থবিজ্ঞান — ভেক্টরের বিভাজন ও সামান্তরিকের সূত্র</p>
+        <p>Made with ❤️ for HSC Students</p>
+    </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
